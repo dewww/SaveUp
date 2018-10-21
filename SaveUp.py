@@ -3,27 +3,62 @@
 #import time
 import json
 
+def weekly_total_action(sender):
+	v['view1'].hidden = True
+	v['view2'].bring_to_front()
+	v['view2'].hidden = False
+
+def sweep_action(sender):
+	v['view1'].hidden = True
+	v['view3'].bring_to_front()
+	v['view3'].hidden = False
+
+def reset_view(sender):
+	v['view1'].bring_to_front()
+	v['view1'].hidden = False
+	v['view2'].send_to_back()
+	v['view2'].hidden = True
+	v['view3'].send_to_back()
+	v['view3'].hidden = True
+
+def segmented_action(sender):
+#	if sender.segments[sender.selected_index] == 'meetinggoalsegment':
+	sender.selected_index = 0 #reset 
+	v['view1']['saveuptosegment'].selected_index += 1
+
 data = '''\
-QlpoOTFBWSZTWY/tLtAABaDf4VUQVGd/9b+nmaq/79/+QAAAIBAAUAReCjegBYoDhkojI0
-DRoAAAMgADQ0AA0GiAA0JlFPUNAAAAyHqAAADjJk00wmRkDAjE0YIwg0aYABBFRGqH6p6n
-6oADQAB6gANNAA0ABEoIjRHpMmimnpPU00B6QHqaAHqeo8U/Sn6oLo8ikBUPoQ1vnOOqlY
-Db70KKNUIhrQuhQWpACDBJBG98MVFVxUROpFTBIvdRAPDJQA0flMFD+fH954WLnq7vXncT
-kUKa/mPkD9ocNXN5TvajClLVCtAsLA2tapJC6xkYo0EupBMk4dPwPJ4oVQITHalZm3FcDI
-gLNrOLssExBJXSzjo+FcsWQZ6FogTgCHsX5exDsLUWywhaxRUpUohFsDaqFULWCpUCsoto
-hZQ9HGE1N2p/GnrqFAIIVQohRA6RgyAhnnXtp6KdS3L9XbezBZdJZE+EiICpQMmmOScT9A
-6kcRWkqpFXM1c+nzCNKg5zpKyMblMVgEApFGPLAmY0llZVz2wgVqdMAa1EQfezEN87O33V
-y55DjynIFdaDLwZXMivYNW0MthZEwVzBZFjO7Q0tlu2qsszFaCiXYGFU4HqNXETjDX7lg7
-KAlC9FCYIrpeYfEEVGTw4pNUOB04bMyIpB0ispQM7nunJK1dRodDo74PnEiPVrkTqsovRF
-nE35cCDkhvWFU20U2LvO2XW3TYebHhmJiDrVmSKUErUSW6hscyuWCGprIpmkMOgmn1fNjQ
-1JnCsVtSW1GMk6e0zcRasttYQMDJEAAOxAF+AWn4JJL4Ugs3U0Z3a5rMG7RlAcQ01e8BVa
-bkNNyUazSWtxJUl84xhw2kqu0ZqvIOPgYZAK74HB8uhaFm4sMz0vbbbYJSU5pTUUiiOWgS
-jysrOYSsk4ni7Fby4ZBAP7va3sABmBxDBiJt22oXsLc04C6oust6/syovYhVJAmoYqFxO/
-tk9tfIUnBSUih/T4e0S6EQNWrWJXu1IX8zD0ghxXDYJtEmBQPHhiXcjcENe9EoJoHbloR7
-4W9xSCZeeRju9lxMF4b/UhRRJuaTYgQWv1vwc8SzOQ+ampcOjZkZa058ygsIvp0LZQqJ0V
-fe6xMAMWCYDnQENuOteYDdjbrWIaONy+C3EohXIWiQIdG3AyE1c4czmL84b3dpzMYX2PK8
-ucyUK+zSJzMDZHeoTFE2XzE0UB3LzqGY47fIeeQDibJCtVeNxKBmM3Ca10kz/vmEwCpDlE
-2HQaUN9cMqdImpCn+6XpmBaCFMQ9Y6VoeKEQ74pCRCMYQIZKH4/duwv5KH11AyEDa9yChK
-iMPOoojsEniUKIA+/S/i7kinChIR/aXaA=
+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
+MOGz/i7kinChIZGG/XYA==
 '''
 import ui
 import bz2
@@ -33,17 +68,16 @@ v = ui.load_view_str(pyui.decode('utf-8'))
 
 # ------------------------
 
-#v['imageview1'].image=ui.Image.named('photo.jpg')
 
 v.name = '$aveUp^'
+v['view2'].hidden = True
+v['view3'].hidden = True
+v['view3']['imageview1'].image=ui.Image.named('IMG_0417.PNG')
+#v['view3'].hidden = False
+#v['view3'].bring_to_front()
 
-def segmented_action(sender):
-#	if sender.segments[sender.selected_index] == 'meetinggoalsegment':
-	sender.selected_index = 0 #reset 
-	v['saveuptosegment'].selected_index += 1
-
-segmented = v['meetinggoalsegment'] # Determine if it is the meetinggoalsegment control
-segmented.action = segmented_action
+#v['meetinggoalsegment'].action = segmented_action
+#v['button1'].action = segmented_action
 
 #av = ui.load_view()
 v.present('sheet')
