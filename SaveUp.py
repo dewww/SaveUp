@@ -9,10 +9,12 @@ def weekly_total_action(sender):
 	v['view2'].hidden = False
 
 def sweep_action(sender):
-	v['view1'].hidden = True
+	v['view3'].send_to_back()
+#	v['view1'].hidden = True
 	v['view3'].bring_to_front()
 	v['view3'].hidden = False
-
+	v['view3'].present('popover')
+	
 def reset_view(sender):
 	v['view1'].bring_to_front()
 	v['view1'].hidden = False
@@ -68,11 +70,9 @@ v = ui.load_view_str(pyui.decode('utf-8'))
 
 # ------------------------
 
-
 v.name = '$aveUp^'
 v['view2'].hidden = True
 v['view3'].hidden = True
-v['view3']['imageview1'].image=ui.Image.named('IMG_0417.PNG')
 #v['view3'].hidden = False
 #v['view3'].bring_to_front()
 
