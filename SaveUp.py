@@ -2,7 +2,7 @@
 #import pprint
 #import time
 import json
-
+	
 def weekly_total_action(sender):
 	v['view1'].send_to_back()
 #	v['view1'].hidden = True
@@ -30,40 +30,48 @@ def segmented_action(sender):
 #	if sender.segments[sender.selected_index] == 'meetinggoalsegment':
 	sender.selected_index = 0 #reset 
 	v['view1']['saveuptosegment'].selected_index += 1
+	if v['view1']['saveuptosegment'].selected_index <= 0:
+		v['view1']['imageview1'].hidden = True	
+	else:
+		v['view1']['imageview1'].hidden = True	
+		v['view1']['imageview1'].image = ui.Image.named('IMG_042'+format(v['view1']['saveuptosegment'].selected_index)+'.PNG')
+		v['view1']['imageview1'].hidden = False
+	print('IMG_042'+format(v['view1']['saveuptosegment'].selected_index)+'.PNG')
 
+		
 data = '''\
-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
-ludUA=
+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
 '''
 import ui
 import bz2
@@ -77,6 +85,8 @@ v.name = '$aveUp^'
 v['Transactions'].hidden = True
 v['Congratulations'].hidden = True
 v['Congratulations']['imageview1'].image = ui.Image.named('IMG_0417.PNG')
+v['view1']['imageview1'].image = ui.Image.named('IMG_0420.PNG')
+print('IMG_042'+format(v['view1']['saveuptosegment'].selected_index)+'.PNG')
 #v['Congratulations'].hidden = False
 #v['Congratulations'].bring_to_front()
 
