@@ -1,0 +1,52 @@
+{
+  "transaction": [
+    {
+      "CONTAINER": "bank",
+      "id": 6199521803,
+      "amount": {
+        "amount": 3680.29,
+        "currency": "USD"
+      },
+      "baseType": "DEBIT",
+      "categoryType": "EXPENSE",
+      "categoryId": 17,
+      "category": "Loans",
+      "categorySource": "SYSTEM",
+      "highLevelCategoryId": 10000004,
+      "createdDate": "2018-01-19T13:42:35Z",
+      "lastUpdated": "2018-01-19T13:42:35Z",
+      "description": {
+        "original": "ACH Withdrawal-Debit XXXXXXXX00 - PPD US BANK - LOAN A BILL PAYMT",
+        "simple": "U.S. Bank Loan"
+      },
+      "type": "PAYMENT",
+      "subType": "LOAN",
+      "isManual": false,
+      "date": "2019-03-10",
+      "transactionDate": "2019-03-10",
+      "postDate": "2019-03-10",
+      "status": "POSTED",
+      "accountId": 1112165599,
+      "runningBalance": {
+        "amount": 5974.21,
+        "currency": "USD"
+      },
+      "checkNumber": "998",
+      "merchant": {
+        "id": "u.s.bank",
+        "name": "U.S. Bank",
+        "source": "FACTUAL",
+        "categoryLabel": [
+          "Loans"
+        ],
+        "address": {
+          "address1": "4160 Mission St",
+          "city": "San Francisco",
+          "state": "CA",
+          "country": "USA",
+          "zip": "94112"
+        }
+      }
+    }
+  ]
+}
